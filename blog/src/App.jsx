@@ -1,10 +1,10 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import { Link } from "react-router-dom"
+import { useState } from 'react';
+import reactLogo from './assets/react.svg';
+import viteLogo from '/vite.svg';
+import { Link } from 'react-router-dom';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
     <>
@@ -29,11 +29,10 @@ function App() {
         Click on the Vite and React logos to learn more
       </p>
 
-    <Link to='/profile'>profile</Link>
-    <Link to='/auth'>auth</Link>
-
+      <Link to="/profile">profile</Link>
+      <Link to="/auth">auth</Link>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
