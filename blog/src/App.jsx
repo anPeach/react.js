@@ -30,7 +30,8 @@ function App() {
       </p>
 
       <Link to="/profile">profile</Link>
-      <Link to="/auth">auth</Link>
+      <Link to="/login">login</Link>
+      <Link to="/registration">registration</Link>
     </>
   );
 }
