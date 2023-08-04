@@ -1,0 +1,9 @@
+body {
+  height: 100vh;
+  font-size: 13px;
+  background-color: rgb(246, 247, 249);
+}
+
+#root {
+  height: 100vh;
+}

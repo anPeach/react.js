@@ -1,11 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './Login.module.css';
+import { useDispatch } from 'react-redux';
+import { login } from '../../store/user/slice';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -18,41 +23,49 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await axios.post(
-      'http://localhost:3000/auth/login',
-      {
-        email,
-        password,
-      },
-    );
+    const response = await axios.post('http://localhost:3000/auth/login', {
+      email,
+      password,
+    });
 
-    console.log('response', response);
+    sessionStorage.setItem('user', { email, password });
+    dispatch(login({ token: response.data }));
 
     return navigate('/profile');
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          value={email}
-          onChange={handleEmailChange}
-        />
-      </div>
-      <div>
-        <label htmlFor="password">Password:</label>
-        <input
-          type="password"
-          id="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-      <button type="submit">Войти</button>
-    </form>
+    <section className={styles.container}>
+      <form onSubmit={handleSubmit} className={styles.form}>
+        <div className={styles.form__element}>
+          <label htmlFor="email" className={styles.form__label}>
+            Email:
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={handleEmailChange}
+            className={styles.form__input}
+          />
+        </div>
+        <div className={styles.form__element}>
+          <label htmlFor="password" className={styles.form__label}>
+            Password:
+          </label>
+          <input
+            type="password"
+            id="password"
+            value={password}
+            onChange={handlePasswordChange}
+            className={styles.form__input}
+          />
+        </div>
+        <button type="submit" className={styles.form__button}>
+          Login
+        </button>
+      </form>
+    </section>
   );
 };
 
