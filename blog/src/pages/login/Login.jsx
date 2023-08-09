@@ -28,8 +28,8 @@ const Login = () => {
       password,
     });
 
-    sessionStorage.setItem('user', { email, password });
-    dispatch(login({ token: response.data }));
+    sessionStorage.setItem('user', JSON.stringify({ id: response.data.id }));
+    dispatch(login({ ...response.data }));
 
     return navigate('/profile');
   };
