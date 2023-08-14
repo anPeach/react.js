@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { registration } from '../../store/user/slice';
+import { registerUser } from '../../store/user/actions';
+import { useNavigate } from 'react-router-dom';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +9,7 @@ const Registration = () => {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const handleEmailChange = (event) => {
@@ -31,19 +32,13 @@ const Registration = () => {
     event.preventDefault();
 
     try {
-      const response = await axios.post(
-        'http://localhost:3000/auth/registration',
-        {
-          email,
-          password,
-          name,
-          nickname,
-        },
-      );
+      const user = await dispatch(
+        registerUser({ email, name, nickname, password }),
+      ).unwrap();
 
-      sessionStorage.setItem('user', JSON.stringify({ id: response.data.id }));
-      dispatch(registration({ ...response.data }));
+      sessionStorage.setItem('user', JSON.stringify(user));
 
+      return navigate('/profile');
     } catch (error) {
       console.error('Ошибка регистрации:', error);
     }

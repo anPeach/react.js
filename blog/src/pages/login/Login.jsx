@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import styles from './Login.module.css';
 import { useDispatch } from 'react-redux';
-import { login } from '../../store/user/slice';
+
+import styles from './Login.module.css';
+
+import { loginUser } from '../../store/user/actions';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -23,13 +24,8 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const response = await axios.post('http://localhost:3000/auth/login', {
-      email,
-      password,
-    });
-
-    sessionStorage.setItem('user', JSON.stringify({ id: response.data.id }));
-    dispatch(login({ ...response.data }));
+    const user = await dispatch(loginUser({ email, password })).unwrap();
+    sessionStorage.setItem('user', JSON.stringify(user));
 
     return navigate('/profile');
   };

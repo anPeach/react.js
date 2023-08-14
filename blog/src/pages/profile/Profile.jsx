@@ -1,34 +1,23 @@
-// import Header from '../header/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import styles from './Profile.module.css';
-import axios from 'axios';
 
-import { selectUser, setUserData } from '../../store/user/slice';
+import { selectUser } from '../../store/user/slice';
+import { fetchPosts } from '../../store/post/actions';
+import { updateUser } from '../../store/user/actions';
 
 const Profile = () => {
   const { user } = useSelector(selectUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const controller = new AbortController();
+    const { id } = JSON.parse(sessionStorage.getItem('user'));
+    dispatch(fetchPosts(id));
+    
     if (user) return;
+    dispatch(updateUser(id));
 
-    const fetchData = async () => {
-      const { id } = JSON.parse(sessionStorage.getItem('user'));
-
-      const response = await axios.get(
-        `http://localhost:3000/users/${id}`,
-      );
-
-      dispatch(setUserData({ ...response.data }));
-    };
-
-    fetchData();
-
-    return () => {
-      controller.abort();
-    };
+    return () => {};
   }, [dispatch, user]);
 
   if (!user) {
