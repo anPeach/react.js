@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { baseApi } from '../../api/api';
 
 export const registerUser = createAsyncThunk(
   'user/registerUser',
   async (formData) => {
-    const response = await axios.post(
-      'http://localhost:3000/auth/registration',
+    const response = await baseApi.post(
+      'auth/registration',
       formData,
     );
 
@@ -17,8 +17,8 @@ export const loginUser = createAsyncThunk(
   'user/loginUser',
   async (formData) => {
     try {
-      const response = await axios.post(
-        'http://localhost:3000/auth/login',
+      const response = await baseApi.post(
+        'auth/login',
         formData,
       );
 
@@ -33,7 +33,7 @@ export const updateUser = createAsyncThunk(
   'user/updateUser',
   async (id) => {
     try {
-      const response = await axios.get(`http://localhost:3000/users/${id}`);
+      const response = await baseApi.get(`users/${id}`);
 
       return response.data;
     } catch (error) {
