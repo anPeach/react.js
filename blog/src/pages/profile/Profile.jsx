@@ -2,18 +2,20 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import styles from './Profile.module.css';
 
-import { selectUser } from '../../store/user/slice';
+import { selectLoggedInUser } from '../../store/user/slice';
 import { fetchPosts } from '../../store/post/actions';
 import { updateUser } from '../../store/user/actions';
+import { selectAllPosts } from '../../store/post/slice';
 
 const Profile = () => {
-  const { user } = useSelector(selectUser);
+  const user  = useSelector(selectLoggedInUser);
+  const posts = useSelector(selectAllPosts);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const { id } = JSON.parse(sessionStorage.getItem('user'));
     dispatch(fetchPosts(id));
-    
+
     if (user) return;
     dispatch(updateUser(id));
 
@@ -32,7 +34,7 @@ const Profile = () => {
           <ul className={styles.profile__list}>
             <li className={styles.profile__name}>{user.name}</li>
             <li className={styles.profile__nickname}>{user.nickname}</li>
-            <li className={styles.profile__posts}>posts</li>
+            <li className={styles.profile__posts}>{posts.length} posts</li>
           </ul>
         </div>
       </div>
