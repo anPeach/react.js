@@ -1,7 +1,9 @@
 import { createEntityAdapter, createSlice } from '@reduxjs/toolkit';
 import { loginUser, registerUser, updateUser } from './actions';
 
-const userAdapter = createEntityAdapter();
+const userAdapter = createEntityAdapter({
+  selectId: (user) => user.id,
+});
 
 const initialState = userAdapter.getInitialState({
   loggedInUserId: '',
@@ -31,6 +33,7 @@ export const {
   selectAll: selectAllUsers,
   selectById: selectUserById,
   selectIds: selectUserIds,
+  selectEntities: selectUserEntities,
 } = userAdapter.getSelectors((state) => state.user);
 
 const selectLoggedInId = (state) => state.user.loggedInUserId;

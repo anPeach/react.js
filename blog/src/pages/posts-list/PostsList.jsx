@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectAllPosts } from '../../store/post/slice';
 import { useEffect } from 'react';
 import { fetchPosts } from '../../store/post/actions';
-import { selectAllUsers } from '../../store/user/slice';
+import { selectUserEntities } from '../../store/user/slice';
+import PostItem from './PostItem';
 
 const PostsList = () => {
   const posts = useSelector(selectAllPosts);
-  const users = useSelector(selectAllUsers)
+  const users = useSelector(selectUserEntities);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,15 +15,10 @@ const PostsList = () => {
     dispatch(fetchPosts(id));
   }, [dispatch]);
 
-  console.log('users', users);
-
   const postsToRender = posts.map((post) => {
-    return (
-      <div key={post.id}>
-        <p>Author: {post.userId}</p>
-        <p>Text: {post.text}</p>
-      </div>
-    );
+    const user = users[post.userId];
+
+    return (<PostItem key={post.id} post={post} nickname={user.nickname}/>);
   });
 
   return <div>{postsToRender}</div>;

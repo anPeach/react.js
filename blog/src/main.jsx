@@ -32,8 +32,23 @@ const router = createBrowserRouter([
     ),
   },
   { path: '/registration', element: <Registration /> },
-  { path: '/post', element: <Post /> },
-  { path: '/posts', element: <PostsList /> },
+  {
+    path: '/posts',
+    children: [
+      {
+        index: true,
+        element: (
+          <ProtectedRoute>
+            <PostsList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: ':id',
+        element: <Post />,
+      },
+    ],
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
