@@ -17,7 +17,11 @@
     "react-dom": "^18.2.0",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.14.1",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.2",
+    "redux-toolkit-persist": "^1.1.0",
+    "reduxjs-toolkit-persist": "^7.2.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

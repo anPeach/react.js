@@ -4,12 +4,11 @@ import styles from './Profile.module.css';
 
 import { selectLoggedInUser } from '../../store/user/slice';
 import { fetchPosts } from '../../store/post/actions';
-import { updateUser } from '../../store/user/actions';
 import { selectAllPosts } from '../../store/post/slice';
 import { Link } from 'react-router-dom';
 
 const Profile = () => {
-  const user  = useSelector(selectLoggedInUser);
+  const user = useSelector(selectLoggedInUser);
   const posts = useSelector(selectAllPosts);
   const dispatch = useDispatch();
 
@@ -17,15 +16,8 @@ const Profile = () => {
     const { id } = JSON.parse(sessionStorage.getItem('user'));
     dispatch(fetchPosts(id));
 
-    if (user) return;
-    dispatch(updateUser(id));
-
     return () => {};
-  }, [dispatch, user]);
-
-  if (!user) {
-    return;
-  }
+  }, [dispatch]);
 
   return (
     <div>
