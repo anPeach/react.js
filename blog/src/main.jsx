@@ -6,7 +6,7 @@ import 'normalize.css';
 import './index.css';
 
 import App from './App.jsx';
-import { Login, Profile, Registration, Post, ProtectedRoute } from './pages';
+import { Login, Profile, Registration, Post, ProtectedRoute, PostsList } from './pages';
 import store from './store/store';
 
 const router = createBrowserRouter([
@@ -25,6 +25,7 @@ const router = createBrowserRouter([
   },
   { path: '/registration', element: <Registration /> },
   { path: '/post', element: <Post /> },
+  { path: '/posts', element: <PostsList /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

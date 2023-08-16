@@ -6,6 +6,7 @@ import { selectLoggedInUser } from '../../store/user/slice';
 import { fetchPosts } from '../../store/post/actions';
 import { updateUser } from '../../store/user/actions';
 import { selectAllPosts } from '../../store/post/slice';
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const user  = useSelector(selectLoggedInUser);
@@ -37,6 +38,7 @@ const Profile = () => {
             <li className={styles.profile__posts}>{posts.length} posts</li>
           </ul>
         </div>
+        <Link to="/posts">posts</Link>
       </div>
     </div>
   );
