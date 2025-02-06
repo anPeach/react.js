@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { registerUser } from '../../store/user/actions';
 import { useNavigate } from 'react-router-dom';
+
+import { registerUser } from '../../store';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -30,7 +31,12 @@ const Registration = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+    console.log('{ email, name, nickname, password }', {
+      email,
+      name,
+      nickname,
+      password,
+    });
     try {
       const user = await dispatch(
         registerUser({ email, name, nickname, password }),

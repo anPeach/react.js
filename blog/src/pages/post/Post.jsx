@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { selectPostById } from '../../store/post/slice';
 
 import styles from './Post.module.css';
-import { selectUserById } from '../../store/user/slice';
+import { selectUserById, selectPostById } from '../../store';
 
 const Post = () => {
   const { id } = useParams();
   const post = useSelector((state) => selectPostById(state, id));
+  console.log('post', post);
   const user = useSelector((state) => selectUserById(state, post.userId));
 
   return (

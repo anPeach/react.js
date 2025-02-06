@@ -2,20 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { persistor, store } from './store/store';
 import { PersistGate } from 'redux-persist/integration/react';
+
+import { persistor, store } from './store/store';
 import 'normalize.css';
 import './index.css';
 
 import App from './App.jsx';
-import {
-  Login,
-  Profile,
-  Registration,
-  Post,
-  ProtectedRoute,
-  PostsList,
-} from './pages';
+import { Login, Profile, Registration, Post } from './pages';
+import { ProtectedRoute } from './components';
 
 const router = createBrowserRouter([
   {
@@ -35,14 +30,6 @@ const router = createBrowserRouter([
   {
     path: '/posts',
     children: [
-      {
-        index: true,
-        element: (
-          <ProtectedRoute>
-            <PostsList />
-          </ProtectedRoute>
-        ),
-      },
       {
         path: ':id',
         element: <Post />,

@@ -10,7 +10,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "antd": "^5.23.0",
     "axios": "^1.4.0",
     "normalize.css": "^8.0.1",
     "react": "^18.2.0",
@@ -21,7 +23,8 @@
     "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.2",
     "redux-toolkit-persist": "^1.1.0",
-    "reduxjs-toolkit-persist": "^7.2.1"
+    "reduxjs-toolkit-persist": "^7.2.1",
+    "styled-components": "^6.1.14"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

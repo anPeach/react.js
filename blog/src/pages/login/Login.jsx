@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import styles from './Login.module.css';
 
-import { loginUser } from '../../store/user/actions';
+import { loginUser } from '../../store';
 
 const Login = () => {
   const [email, setEmail] = useState('');
